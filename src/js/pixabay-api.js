@@ -6,11 +6,17 @@ const searchParams = {
   orientation: 'horizontal',
   safesearch: true,
 };
-function getPhotos(query) {
+
+export function getPhotos(query) {
   const searchOptions = new URLSearchParams({ ...searchParams, q: query });
-  //   console.log(searchOptions.toString());
-  fetch(`${BASE_URL}?${searchOptions}`).then(response => {
-    console.log(response);
-  });
+  return fetch(`${BASE_URL}?${searchOptions}`)
+    .then(response => {
+      if (response.ok === false) {
+        throw new Error(response.message);
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
-getPhotos('Flower');
