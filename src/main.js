@@ -16,7 +16,8 @@ const lightboxInstance = new SimpleLightbox('.gallery a', {
 
 function onSearchSubmit(event) {
   event.preventDefault();
-  const searchQuery = event.currentTarget.elements.searchField.value.trim();
+  const form = event.currentTarget;
+  const searchQuery = form.elements.searchField.value.trim();
   if (searchQuery === '') {
     console.log('Query cannot be empty');
     return;
@@ -41,5 +42,6 @@ function onSearchSubmit(event) {
     })
     .finally(() => {
       loaderEl.classList.add('is-hidden');
+      form.reset();
     });
 }
