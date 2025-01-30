@@ -1,2 +1,26 @@
-(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const s of t.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&n(s)}).observe(document,{childList:!0,subtree:!0});function o(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function n(e){if(e.ep)return;e.ep=!0;const t=o(e);fetch(e.href,t)}})();const i="48520843-c7005fc601dadff0df2bc86d2",a="https://pixabay.com/api/",f={key:i,image_type:"photo",orientation:"horizontal",safesearch:!0};function l(c){const r=new URLSearchParams({...f,q:c});fetch(`${a}?${r}`).then(o=>{console.log(o)})}l("Flower");
+import{S as u,i as f}from"./assets/vendor-5ObWk2rO.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))l(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const a of t.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&l(a)}).observe(document,{childList:!0,subtree:!0});function r(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function l(e){if(e.ep)return;e.ep=!0;const t=r(e);fetch(e.href,t)}})();const d="48520843-c7005fc601dadff0df2bc86d2",g="https://pixabay.com/api/",p={key:d,image_type:"photo",orientation:"horizontal",safesearch:!0};function y(s){const o=new URLSearchParams({...p,q:s});return fetch(`${g}?${o}`).then(r=>{if(r.ok===!1)throw new Error(r.message);return r.json()}).catch(r=>{console.log(r)})}function h(s=[]){return s.map((o={})=>{const{webformatURL:r,largeImageURL:l,tags:e,likes:t,views:a,comments:n,downloads:m}=o;return`<li class="gallery-item">
+        <a href="${l}">
+          <div class="gallery-top">
+            <img class="gallery-img" src="${r}" alt="${e}" />
+          </div>
+          <ul class="gallery-bottom">
+            <li class="gallery-bottom-item">
+              <p class="gallery-bottom-stat">Likes</p>
+              <p class="gallery-bottom-value">${t}</p>
+            </li>
+            <li class="gallery-bottom-item">
+              <p class="gallery-bottom-stat">Views</p>
+              <p class="gallery-bottom-value">${a}</p>
+            </li>
+            <li class="gallery-bottom-item">
+              <p class="gallery-bottom-stat">Comments</p>
+              <p class="gallery-bottom-value">${n}</p>
+            </li>
+            <li class="gallery-bottom-item">
+              <p class="gallery-bottom-stat">Downloads</p>
+              <p class="gallery-bottom-value">${m}</p>
+            </li>
+          </ul>
+          </a>
+        </li>`}).join("")}const b=document.querySelector(".search-form"),i=document.querySelector(".gallery"),c=document.querySelector(".loader");b.addEventListener("submit",v);const L=new u(".gallery a",{});function v(s){s.preventDefault();const o=s.currentTarget.elements.searchField.value.trim();if(o===""){console.log("Query cannot be empty");return}i.innerHTML="",c.classList.remove("is-hidden"),y(o).then(r=>{r.hits.length===0&&f.error({message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"});const l=h(r.hits);i.insertAdjacentHTML("beforeend",l),L.refresh()}).finally(()=>{c.classList.add("is-hidden")})}
 //# sourceMappingURL=index.js.map
